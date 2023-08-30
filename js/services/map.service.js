@@ -5,7 +5,7 @@ export const mapService = {
 }
 
 // Var that is used throughout this Module (not global)
-window.initMap=initMap
+// window.initMap=initMap
 var gMap
 
 function initMap(lat = 32.0749831, lng = 34.9120554) {
@@ -20,7 +20,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
             })
             // console.log('Map!', gMap)
         })
-        .then (map=> {
+        .then ((map)=> {
 
             let infoWindow = new google.maps.InfoWindow({
                 content: "Click the map to get Lat/Lng!",
@@ -36,6 +36,7 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
                 infoWindow = new google.maps.InfoWindow({
                   position: mapsMouseEvent.latLng,
                 });
+                console.log(JSON.stringifymapsMouseEvent.latLng.toJSON());
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2),
                     );
@@ -64,7 +65,7 @@ function panTo(lat, lng) {
 
 function _connectGoogleApi() {
     if (window.google) return Promise.resolve()
-    const API_KEY = 'AIzaSyBn5ses1DT9LwwtDcpIAL8BO3CvHhkfZw0&callback=initMap' //TODO: Enter your API Key
+    const API_KEY = 'AIzaSyBn5ses1DT9LwwtDcpIAL8BO3CvHhkfZw0' //TODO: Enter your API Key
     var elGoogleApi = document.createElement('script')
     elGoogleApi.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`
     elGoogleApi.async = true
