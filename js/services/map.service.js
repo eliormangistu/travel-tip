@@ -13,40 +13,36 @@ function initMap(lat = 32.0749831, lng = 34.9120554) {
     return _connectGoogleApi()
         .then(() => {
             // console.log('google available')
-          return  gMap = new google.maps.Map(
+            return gMap = new google.maps.Map(
                 document.querySelector('#map'), {
                 center: { lat, lng },
                 zoom: 15
             })
             // console.log('Map!', gMap)
         })
-        .then ((map)=> {
+        .then((map) => {
 
             let infoWindow = new google.maps.InfoWindow({
                 content: "Click the map to get Lat/Lng!",
                 position: map.center,
-              });
-            
-              infoWindow.open(map);
-              // Configure the click listener.
-              map.addListener("click", (mapsMouseEvent) => {
-                // Close the current InfoWindow.
-                infoWindow.close();
-                // Create a new InfoWindow.
+            })
+
+            infoWindow.open(map)
+            map.addListener("click", (mapsMouseEvent) => {
+                infoWindow.close()
                 infoWindow = new google.maps.InfoWindow({
-                  position: mapsMouseEvent.latLng,
+                    position: mapsMouseEvent.latLng,
                 });
-                console.log(JSON.stringifymapsMouseEvent.latLng.toJSON());
                 infoWindow.setContent(
                     JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2),
-                    );
-                    infoWindow.open(map);
-                });
-            }
-            
-            )
-            
+                );
+                infoWindow.open(map)
+            })
         }
+
+        )
+
+}
 
 function addMarker(loc) {
     var marker = new google.maps.Marker({
