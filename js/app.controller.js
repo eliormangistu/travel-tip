@@ -8,8 +8,9 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
-window.onGo = onGo
 window.onDelete = onDelete
+window.onGo = onGo
+
 
 function onInit() {
     mapService.initMap()
@@ -48,8 +49,8 @@ function renderTable(locs) {
       <td>${loc.weather}</td>
       <td>${loc.createdAt}</td>
       <td>${loc.updatedAt}</td>
-      <td><button onclick="onGo()">Go</button></td>
-      <td><button onclick="onDelete()">Delete</button></td>
+      <td><button onclick="onGo({lat: ${loc.lat}, lng: ${loc.lng} })">Go</button></td>
+      <td><button onclick="onDelete('${loc.id}')">Delete</button></td>
       </tr>`
     })
     console.log('Locations:', locs)
@@ -67,15 +68,18 @@ function onGetUserPos() {
             console.log('err!!!', err)
         })
 }
+
 function onPanTo() {
     console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)
 }
 
-function onGo() {
-
+function onDelete(id) {
+    locService.deleteLoc(id)
+    onGetLocs()
 }
 
-function onDelete() {
-
+function onGo (pos) {
+    mapService.panTo(pos.lat, pos.lng )
+    mapService.addMarker(pos)
 }

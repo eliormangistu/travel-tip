@@ -2,7 +2,8 @@ import { utilService } from "./util.service.js"
 import { storageService } from "./async-storage.service.js"
 
 export const locService = {
-    getLocs
+    getLocs,
+    deleteLoc
 }
 
 const LOC_KEY = 'locDB'
@@ -41,7 +42,7 @@ function createLocs() {
 
 function _createDemoLocs() {
     const locNames = ['Greatplace', 'Neveragain']
-    const pos = [{ lat: 32.047104, lng: 34.832384 }, { lat: 32.047201, lng: 34.83258 }]
+    const pos = [{ lat: 32.047104, lng: 34.832384 }, { lat: 32.050065, lng: 34.765443 }]
 
     const locs = locNames.map((locName, idx) => {
         const loc = _createLoc(locName)
@@ -67,4 +68,14 @@ function _createLoc(name, lat, lng) {
     loc.createdAt = utilService.getDateTime()
     loc.updatedAt = utilService.getDateTime()
     return loc
+}
+
+
+function deleteLoc(id) {
+    getLocs()
+    .then (locs => {
+        const locIdx = locs.findIndex(loc=>loc.id===id)
+        locs.splice(locIdx,1)
+        utilService.saveToStorage(LOC_KEY, locs)
+    })
 }
