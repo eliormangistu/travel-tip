@@ -53,8 +53,8 @@ function _createDemoLocs() {
     return locs
 }
 
-function getEmptyLoc(id = '', name = '', lat = '', lng = '', createdAt = '', updatedAt = '') {
-    return { id, name, lat, lng, createdAt, updatedAt }
+function getEmptyLoc(id = '', name = '', lat = '', lng = '', weather = 'UNKNOWN', createdAt = '', updatedAt = '') {
+    return { id, name, lat, lng,weather, createdAt, updatedAt }
 }
 
 function _createLoc(name, lat, lng) {
@@ -63,7 +63,8 @@ function _createLoc(name, lat, lng) {
     loc.name = name
     loc.lat = lat
     loc.lng = lng
-    loc.createdAt = Date.now()
-    loc.updatedAt = Date.now()
+    loc.weather
+    loc.createdAt = utilService.getDateTime()
+    loc.updatedAt = utilService.getDateTime()
     return loc
 }

@@ -8,10 +8,13 @@ window.onAddMarker = onAddMarker
 window.onPanTo = onPanTo
 window.onGetLocs = onGetLocs
 window.onGetUserPos = onGetUserPos
+window.onGo = onGo
+window.onDelete = onDelete
 
 function onInit() {
     mapService.initMap()
         .then(() => {
+            onGetLocs()
             console.log('Map is ready')
         })
         .catch(() => console.log('Error: cannot init map'))
@@ -30,13 +33,27 @@ function onAddMarker() {
     mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
 }
 
-onGetLocs()
 function onGetLocs() {
     locService.getLocs()
-        .then(locs => {
-            console.log('Locations:', locs)
-            document.querySelector('.locs').innerText = JSON.stringify(locs, null, 2)
-        })
+        .then(renderTable)
+}
+
+function renderTable(locs) {
+    const locsStrsHtml = locs.map((loc) => {
+        return ` <tr>
+      <td>${loc.id}</td>
+      <td>${loc.name}</td>
+      <td>${loc.lat}</td>
+      <td>${loc.lng}</td>
+      <td>${loc.weather}</td>
+      <td>${loc.createdAt}</td>
+      <td>${loc.updatedAt}</td>
+      <td button onclick="onGo()">Go</td>
+      <td button onclick="onDelete()">Delete</td>
+      </tr>`
+    })
+    console.log('Locations:', locs)
+    document.querySelector('.locs').innerHTML = locsStrsHtml.join('')
 }
 
 function onGetUserPos() {
@@ -53,4 +70,12 @@ function onGetUserPos() {
 function onPanTo() {
     console.log('Panning the Map')
     mapService.panTo(35.6895, 139.6917)
+}
+
+function onGo() {
+
+}
+
+function onDelete() {
+
 }
