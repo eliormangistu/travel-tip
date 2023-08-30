@@ -4,6 +4,7 @@ export const mapService = {
     panTo
 }
 
+
 // Var that is used throughout this Module (not global)
 // window.initMap=initMap
 var gMap
