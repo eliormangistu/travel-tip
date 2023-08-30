@@ -1,4 +1,4 @@
-import { storageService } from './services/storage.service.js'
+import { storageService } from './services/async-storage.service.js'
 import { utilService } from './services/util.service.js'
 import { locService } from './services/loc.service.js'
 import { mapService } from './services/map.service.js'
@@ -15,20 +15,20 @@ function onInit() {
             console.log('Map is ready')
         })
         .catch(() => console.log('Error: cannot init map'))
-    }
-    
-    // This function provides a Promise API to the callback-based-api of getCurrentPosition
-    function getPosition() {
-        console.log('Getting Pos')
-        return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject)
-        })
-    }
-    
-    function onAddMarker() {
-        console.log('Adding a marker')
-        mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
-    }
+}
+
+// This function provides a Promise API to the callback-based-api of getCurrentPosition
+function getPosition() {
+    console.log('Getting Pos')
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+    })
+}
+
+function onAddMarker() {
+    console.log('Adding a marker')
+    mapService.addMarker({ lat: 32.0749831, lng: 34.9120554 })
+}
 
 onGetLocs()
 function onGetLocs() {
