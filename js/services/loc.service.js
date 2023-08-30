@@ -55,7 +55,7 @@ function _createDemoLocs() {
 }
 
 function getEmptyLoc(id = '', name = '', lat = '', lng = '', weather = 'UNKNOWN', createdAt = '', updatedAt = '') {
-    return { id, name, lat, lng,weather, createdAt, updatedAt }
+    return { id, name, lat, lng, weather, createdAt, updatedAt }
 }
 
 function _createLoc(name, lat, lng) {
@@ -73,9 +73,9 @@ function _createLoc(name, lat, lng) {
 
 function deleteLoc(id) {
     getLocs()
-    .then (locs => {
-        const locIdx = locs.findIndex(loc=>loc.id===id)
-        locs.splice(locIdx,1)
-        utilService.saveToStorage(LOC_KEY, locs)
-    })
+        .then(locs => {
+            const locIdx = locs.findIndex(loc => loc.id === id)
+            locs.splice(locIdx, 1)
+            utilService.saveToStorage(LOC_KEY, locs)
+        })
 }
