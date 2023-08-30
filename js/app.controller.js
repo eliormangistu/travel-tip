@@ -48,8 +48,8 @@ function renderTable(locs) {
       <td>${loc.weather}</td>
       <td>${loc.createdAt}</td>
       <td>${loc.updatedAt}</td>
-      <td button onclick="onGo()">Go</td>
-      <td button onclick="onDelete()">Delete</td>
+      <td><button onclick="onGo()">Go</button></td>
+      <td><button onclick="onDelete()">Delete</button></td>
       </tr>`
     })
     console.log('Locations:', locs)
